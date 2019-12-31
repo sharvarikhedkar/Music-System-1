@@ -1,0 +1,73 @@
+
+
+# This is testcases tracks microservices
+test_name: Create a new track
+
+stages:
+  - name: Make sure we are getting success response
+
+    request:
+      url: http://127.0.0.1:5100/tracks
+      method: POST
+      json:
+        track_title: testtrack
+        album_title: testalbum
+        track_artist: testartist
+        track_length: 500
+        media_url: test/test/testmp3
+        album_url: test/testalbum
+      headers:
+        content-type: application/json
+
+    # The expected response code 201
+    response:
+      status_code: 201
+
+---
+test_name: Retrieve a track
+
+stages:
+  - name: Make sure we are getting success response
+
+    request:
+      url: http://127.0.0.1:5100/tracks
+      method: GET
+      
+    # The expected response code 200
+    response:
+      status_code: 200
+
+---
+test_name: Edit a track
+
+stages:
+  - name: Make sure we are getting success response
+
+    request:
+      url: http://127.0.0.1:5100/tracks
+      method: PUT
+      json:
+        track_title: trackChange 004
+        new_album_title: album change name
+        new_track_title: trackChange 005
+        new_media_url: //home/change/media/url/asd.mp3
+      headers:
+        content-type: application/json
+
+    # The expected response code 200
+    response:
+      status_code: 200
+
+---
+test_name: Delete a track
+
+stages:
+  - name: Make sure we are getting success response
+
+    request:
+      url: http://127.0.0.1:5100/tracks/testtrack
+      method: DELETE
+      
+    # The expected response code 200
+    response:
+      status_code: 200
